@@ -1,190 +1,93 @@
-const pages = [
-  {
-    id: "customer",
-    title: "لوحة العميل",
-    group: "العميل",
-    icon: "👤",
-    badge: "14 مناسبة",
-    metrics: [
-      { label: "المناسبات النشطة", value: "08", trend: "+12%" },
-      { label: "الطلبات المستلمة", value: "42", trend: "+18%" },
-      { label: "إجمالي المدفوعات", value: "58,200", trend: "+7%" },
-      { label: "التقييم العام", value: "4.9", trend: "ممتاز" }
-    ],
-    timeline: [
-      { title: "حفلة زواج في الرياض", status: "قيد التنفيذ", meta: "09:00 صباحاً · 24 ديسمبر" },
-      { title: "عيد ميلاد 10 سنوات", status: "مؤكدة", meta: "16:00 مساءً · 05 يناير" },
-      { title: "حفل تخرج", status: "بانتظار الدفع", meta: "20:00 مساءً · 14 يناير" }
-    ],
-    services: [
-      { name: "قاعة افراح", value: "SAR 8,500", action: "عرض التفاصيل" },
-      { name: "تصوير", value: "SAR 2,600", action: "حجز الآن" },
-      { name: "ديكور", value: "SAR 3,300", action: "استعراض" },
-      { name: "حلويات", value: "SAR 1,900", action: "تحديد المذاق" }
-    ],
-    notes: [
-      "تحديث حالة الحجز 3 ضمن المواعيد المقررة.",
-      "تم إكمال دفعة 30% للقاعة في الرياض.",
-      "إشعار تأكيد تم إرساله إلى مزود الخدمة." 
-    ]
-  },
-  {
-    id: "merchant",
-    title: "لوحة التاجر",
-    group: "المتاجر",
-    icon: "🛍️",
-    badge: "19 متجر",
-    metrics: [
-      { label: "الحجوزات اليوم", value: "27", trend: "+9%" },
-      { label: "إيرادات الشهر", value: "128,400", trend: "+24%" },
-      { label: "معدل الإكمال", value: "96%", trend: "جيد" },
-      { label: "الطلبات الجديدة", value: "11", trend: "+3" }
-    ],
-    timeline: [
-      { title: "طلب قاعة القاهرة", status: "تم التأكيد", meta: "العميل: محمد عادل" },
-      { title: "حجز تصوير عبر المنصة", status: "قيد التحضير", meta: "تم الدفع نصف المبلغ" },
-      { title: "استفسار عن باقات الحفلات", status: "متابعة", meta: "آخر تواصل منذ 30 دقيقة" }
-    ],
-    services: [
-      { name: "سيركومز قاعة", value: "SAR 6,200", action: "إدارة" },
-      { name: "مكياج عروس", value: "SAR 1,500", action: "عرض" },
-      { name: "خدمات العشاء", value: "SAR 4,900", action: "تحديث" },
-      { name: "ديكور + ورود", value: "SAR 3,700", action: "حزمة" }
-    ],
-    notes: [
-      "تحديث الأسعار يخص باقة الصيف الحالية.",
-      "تم حذف خدمة غير متاحة في المدينة.",
-      "خانة المراجعات تستقبل تقييمات جديدة this week." 
-    ]
-  },
-  {
-    id: "supplier",
-    title: "لوحة المورد",
-    group: "المتاجر",
-    icon: "📦",
-    badge: "06 موردين",
-    metrics: [
-      { label: "مستوى التوريد", value: "92%", trend: "+5%" },
-      { label: "أوامر الشراء", value: "34", trend: "+12%" },
-      { label: "التأخير", value: "02", trend: "منخفض" },
-      { label: "الاستحقاقات", value: "17,300", trend: "+8%" }
-    ],
-    timeline: [
-      { title: "دفعة من متجر الورود", status: "تم تجهيزها", meta: "التسليم خلال 48 ساعة" },
-      { title: "طلب من قاعة فرح", status: "قيد الانتظار", meta: "تنسيق التوصيل" },
-      { title: "مستلزمات ديكور", status: "مكتملة", meta: "تمت الإضافة إلى المخزون" }
-    ],
-    services: [
-      { name: "ورود فاخر", value: "SAR 1,000", action: "تحديث المخزون" },
-      { name: "حلويات مخصصة", value: "SAR 2,200", action: "عرض" },
-      { name: "تزيين فطور", value: "SAR 980", action: "تسعير" },
-      { name: "مستلزمات الحفل", value: "SAR 3,500", action: "طلب" }
-    ],
-    notes: [
-      "تم تحسين نموذج الطلب لعرض اعتمادات التسليم." ,
-      "إمكانية التوفير على أعباء الشحن المضافة الجديدة.",
-      "تم تحديث مستويات المخزون في واجهة المورّد." 
-    ]
-  },
-  {
-    id: "salon",
-    title: "كاشير الصالون",
-    group: "المتاجر",
-    icon: "💇",
-    badge: "12 جلسة",
-    metrics: [
-      { label: "المبيعات اليوم", value: "SAR 9,800", trend: "+14%" },
-      { label: "العملاء الحاليين", value: "08", trend: "نشط" },
-      { label: "ملء الطاقم", value: "83%", trend: "+6%" },
-      { label: "مؤشرات الربح", value: "21%", trend: "مستقر" }
-    ],
-    timeline: [
-      { title: "جلسة ميك اب عروس", status: "جارٍ", meta: "الموظفة: سارة" },
-      { title: "تجهيز جلسة حلاقة", status: "مؤكدة", meta: "بداية 17:30" },
-      { title: "تحميل باقة عروس", status: "جاهز", meta: "إضافة منتجات جديدة" }
-    ],
-    services: [
-      { name: "ميك أب عروس", value: "SAR 1,400", action: "تأمين" },
-      { name: "تنسيق شعر", value: "SAR 900", action: "حجز" },
-      { name: "صفائف شعر", value: "SAR 1,100", action: "إدارة" },
-      { name: "منتجات عناية", value: "SAR 620", action: "عرض" }
-    ],
-    notes: [
-      "تمت إضافة باقة فخمة للميك أب الصيفي.",
-      "جميع العملاء يحتاجون لجدولة تجديد المنتج.",
-      "التذاكر المؤكدة تم ارسالها عبر الرسائل." 
-    ]
-  },
-  {
-    id: "tailor",
-    title: "خياطة رجالية",
-    group: "المتاجر",
-    icon: "🧵",
-    badge: "07 طلبات",
-    metrics: [
-      { label: "طلبات قيد التنفيذ", value: "14", trend: "+2" },
-      { label: "المبيعات الشهرية", value: "SAR 17,600", trend: "+11%" },
-      { label: "معدل التسليم", value: "94%", trend: "ممتاز" },
-      { label: "التقييم", value: "4.8", trend: "مميز" }
-    ],
-    timeline: [
-      { title: "طلب بدلة عرس", status: "قيد الخياطة", meta: "الاستلام يوم الاثنين" },
-      { title: "بدلة احتفالية", status: "مكتمل", meta: "تم التسليم أمس" },
-      { title: "خياطة فستان جديد", status: "في المتابعة", meta: "تم تحديد المقاسات" }
-    ],
-    services: [
-      { name: "بدلات سهرة", value: "SAR 2,200", action: "خياطة" },
-      { name: "ملابس احتفالية", value: "SAR 1,600", action: "عرض" },
-      { name: "تعديل أزياء", value: "SAR 500", action: "استلام" },
-      { name: "تصميم خاص", value: "SAR 3,100", action: "طلب" }
-    ],
-    notes: [
-      "مقاسات العيد تم تحديثها في النظام.",
-      "لدينا طلبات عمل متأخرة تحتاج متابعة عاجلة.",
-      "أعمدة الأسعار تمت مراجعتها أمس." 
-    ]
-  },
-  {
-    id: "admin",
-    title: "لوحة المسؤول",
-    group: "الإدارة",
-    icon: "🛡️",
-    badge: "1,284 مستخدم",
-    metrics: [
-      { label: "المتاجر النشطة", value: "364", trend: "+18%" },
-      { label: "الإيراد الكلي", value: "SAR 2.4M", trend: "+31%" },
-      { label: "المطالبات", value: "31", trend: "متوسط" },
-      { label: "العمولات", value: "SAR 310K", trend: "+22%" }
-    ],
-    timeline: [
-      { title: "تحديث النظام التجاري", status: "جاهز", meta: "تحديث营销 وحولة الطلب" },
-      { title: "تقييمات متاجر جديدة", status: "مراجعة", meta: "مذكرات للتحقق" },
-      { title: "إعلانات ترويجية", status: "قيد التنفيذ", meta: "حملة المدينة الكبرى" }
-    ],
-    services: [
-      { name: "إدارة المتاجر", value: "1,240", action: "مراجعة" },
-      { name: "الإحصاءات", value: "96 تقارير", action: "عرض" },
-      { name: "العمولات", value: "SAR 310K", action: "فحص" },
-      { name: "الدعم", value: "28 تذكرة", action: "حل" }
-    ],
-    notes: [
-      "ارتفاع مستخدمين الجدد خلال آخر 30 يومًا.",
-      "معيار رضا العملاء فوق 4.8.",
-      "تم تجهيز خطة تمويل مناسبة للمرحلة القادمة." 
-    ]
-  }
-];
+const app = document.querySelector('#app');
 
-const app = document.querySelector("#app");
-let currentPage = 0;
+const tabs = {
+  customer: { title: 'لوحة العميل', group: 'العميل', icon: '👤' },
+  merchant: { title: 'لوحة التاجر', group: 'المتاجر', icon: '🛍️' },
+  supplier: { title: 'لوحة المورد', group: 'المتاجر', icon: '📦' },
+  salon: { title: 'كاشير الصالون', group: 'المتاجر', icon: '💇' },
+  tailor: { title: 'خياطة رجالية', group: 'المتاجر', icon: '🧵' },
+  admin: { title: 'لوحة المسؤول', group: 'الإدارة', icon: '🛡️' }
+};
+
+const state = {
+  currentTab: 'customer',
+  isMenuOpen: false,
+  dashboard: null,
+  error: null,
+  loading: false
+};
+
+async function loadDashboard(tab = state.currentTab) {
+  state.loading = true;
+  state.error = null;
+  render();
+
+  try {
+    const response = await fetch(`/api/dashboard?tab=${encodeURIComponent(tab)}`);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'تعذر تحميل لوحة التحكم');
+    }
+
+    state.dashboard = data;
+    state.currentTab = tab;
+    state.loading = false;
+    render();
+  } catch (err) {
+    state.loading = false;
+    state.error = err.message;
+    render();
+  }
+}
+
+async function submitOrder(event) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const data = new FormData(form);
+  const payload = {
+    title: String(data.get('title') || '').trim(),
+    customer: String(data.get('customer') || '').trim(),
+    service: String(data.get('service') || '').trim(),
+    amount: Number(data.get('amount')) || 0,
+    status: 'قيد التنفيذ'
+  };
+
+  if (!payload.title || !payload.customer || !payload.service || payload.amount <= 0) {
+    state.error = 'يرجى تعبئة جميع الحقول بشكل صحيح.';
+    render();
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error || 'تعذر إنشاء الطلب');
+    }
+
+    state.error = null;
+    form.reset();
+    await loadDashboard(state.currentTab);
+  } catch (error) {
+    state.error = error.message;
+    render();
+  }
+}
 
 function renderMenu() {
-  const groups = {};
-
-  pages.forEach((page, index) => {
-    if (!groups[page.group]) groups[page.group] = [];
-    groups[page.group].push({ page, index });
-  });
+  const grouped = Object.entries(tabs).reduce((acc, [key, meta]) => {
+    const group = meta.group;
+    if (!acc[group]) acc[group] = [];
+    acc[group].push([key, meta]);
+    return acc;
+  }, {});
 
   return `
     <div class="topbar">
@@ -193,13 +96,13 @@ function renderMenu() {
         <span>منصة ليلتي</span>
       </div>
 
-      <button class="page-switch" type="button" aria-expanded="false">
-        <span class="page-switch__icon">${pages[currentPage].icon}</span>
-        <span class="page-switch__label">${pages[currentPage].title}</span>
+      <button class="page-switch" type="button" aria-expanded="${state.isMenuOpen}">
+        <span class="page-switch__icon">${tabs[state.currentTab].icon}</span>
+        <span class="page-switch__label">${tabs[state.currentTab].title}</span>
         <span class="page-switch__chevron">▾</span>
       </button>
 
-      <span class="counter">${pages.length} لوحات</span>
+      <span class="counter">${Object.keys(tabs).length} لوحات</span>
 
       <div class="topbar-actions">
         <button class="btn btn-secondary" type="button" data-action="login">دخول تاجر</button>
@@ -208,99 +111,104 @@ function renderMenu() {
       </div>
     </div>
 
-    <div class="menu-panel" id="menu-panel">
-      ${Object.entries(groups)
-        .map(
-          ([groupName, items]) => `
-            <div class="menu-group">
-              <div class="menu-group__label">${groupName}</div>
-              ${items
-                .map(
-                  ({ page, index }) => `
-                    <button
-                      class="menu-item ${index === currentPage ? "is-active" : ""}"
-                      type="button"
-                      data-index="${index}"
-                    >
-                      <span class="menu-item__icon">${page.icon}</span>
-                      <span class="menu-item__label">${page.title}</span>
-                      <span class="menu-item__index">${index + 1}</span>
-                    </button>
-                  `
-                )
-                .join("")}
-            </div>
-          `
-        )
-        .join("")}
+    <div class="menu-panel ${state.isMenuOpen ? 'is-open' : ''}">
+      ${Object.entries(grouped).map(([groupName, items]) => `
+        <div class="menu-group">
+          <div class="menu-group__label">${groupName}</div>
+          ${items.map(([key, meta], index) => `
+            <button class="menu-item ${state.currentTab === key ? 'is-active' : ''}" type="button" data-tab="${key}">
+              <span class="menu-item__icon">${meta.icon}</span>
+              <span class="menu-item__label">${meta.title}</span>
+              <span class="menu-item__index">${index + 1}</span>
+            </button>
+          `).join('')}
+        </div>
+      `).join('')}
     </div>
   `;
 }
 
-function renderMetrics(metrics) {
-  return metrics
-    .map(
-      (metric) => `
-        <article class="metric-card">
-          <div class="metric-card__label">${metric.label}</div>
-          <div class="metric-card__value">${metric.value}</div>
-          <div class="metric-card__trend">${metric.trend}</div>
-        </article>
-      `
-    )
-    .join("");
+function renderMetrics(metrics = []) {
+  return metrics.map((metric) => `
+    <article class="metric-card">
+      <div class="metric-card__label">${metric.label}</div>
+      <div class="metric-card__value">${metric.value}</div>
+      <div class="metric-card__trend">${metric.trend}</div>
+    </article>
+  `).join('');
 }
 
-function renderTimeline(items) {
-  return items
-    .map(
-      (item) => `
-        <li class="timeline-item">
-          <span class="timeline-dot"></span>
-          <div>
-            <strong>${item.title}</strong>
-            <small>${item.status} · ${item.meta}</small>
-          </div>
-        </li>
-      `
-    )
-    .join("");
+function renderTimeline(items = []) {
+  return items.map((item) => `
+    <li class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div>
+        <strong>${item.title}</strong>
+        <small>${item.status} · ${item.meta}</small>
+      </div>
+    </li>
+  `).join('');
 }
 
-function renderServices(services) {
-  return services
-    .map(
-      (service) => `
-        <div class="service-row">
-          <div>
-            <strong>${service.name}</strong>
-            <span>${service.value}</span>
-          </div>
-          <button type="button">${service.action}</button>
-        </div>
-      `
-    )
-    .join("");
+function renderServices(items = []) {
+  return items.map((service) => `
+    <div class="service-row">
+      <div>
+        <strong>${service.name}</strong>
+        <span>${service.value}</span>
+      </div>
+      <button type="button">${service.action}</button>
+    </div>
+  `).join('');
 }
 
-function renderNotes(notes) {
-  return notes.map((note) => `<li>${note}</li>`).join("");
+function renderNotes(items = []) {
+  return items.map((note) => `<li>${note}</li>`).join('');
 }
 
-function renderDashboard(page) {
+function renderOrders(orders = []) {
+  if (!orders.length) {
+    return '<p class="empty-small">لا توجد طلبات بعد.</p>';
+  }
+
+  return orders.map((order) => `
+    <div class="order-item">
+      <div>
+        <strong>${order.title}</strong>
+        <small>${order.customer} · ${order.service}</small>
+      </div>
+      <div class="order-meta">
+        <span>${Number(order.amount).toLocaleString('ar-SA')} ر.س</span>
+        <em>${order.status}</em>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderDashboard() {
+  if (!state.dashboard) {
+    return `
+      <main class="workspace">
+        <div class="empty-state">${state.loading ? 'جارٍ تحميل البيانات...' : state.error || 'لا توجد بيانات'}</div>
+      </main>
+    `;
+  }
+
+  const { title, group, badge, metrics, timeline, services, notes, recentOrders } = state.dashboard;
+
   return `
     <main class="workspace">
       <section class="hero-panel">
         <div>
-          <span class="eyebrow">${page.group}</span>
-          <h1>${page.title}</h1>
+          <span class="eyebrow">${group}</span>
+          <h1>${title}</h1>
           <p>لوحة تحكم مركزية لإدارة المناسبات وطلبات العملاء ومقدمي الخدمات في واجهة موحدة.</p>
         </div>
-        <div class="hero-badge">${page.badge}</div>
+        <div class="hero-badge">${badge}</div>
       </section>
 
       <section class="metrics-grid">
-        ${renderMetrics(page.metrics)}
+        ${renderMetrics(metrics)}
       </section>
 
       <section class="content-grid">
@@ -309,7 +217,7 @@ function renderDashboard(page) {
             <h2>الجدول الزمني</h2>
             <button type="button" class="inline-button">عرض الكل</button>
           </div>
-          <ul class="timeline">${renderTimeline(page.timeline)}</ul>
+          <ul class="timeline">${renderTimeline(timeline)}</ul>
         </article>
 
         <article class="panel">
@@ -317,7 +225,7 @@ function renderDashboard(page) {
             <h2>الخدمات المهمة</h2>
             <button type="button" class="inline-button">إدارة</button>
           </div>
-          <div class="service-list">${renderServices(page.services)}</div>
+          <div class="service-list">${renderServices(services)}</div>
         </article>
 
         <article class="panel">
@@ -325,58 +233,97 @@ function renderDashboard(page) {
             <h2>ملاحظات سريعة</h2>
             <button type="button" class="inline-button">تحديث</button>
           </div>
-          <ul class="notes-list">${renderNotes(page.notes)}</ul>
+          <ul class="notes-list">${renderNotes(notes)}</ul>
         </article>
+      </section>
+
+      <section class="panel form-panel">
+        <div class="panel-header">
+          <h2>إضافة طلب جديد</h2>
+        </div>
+        <form class="order-form" id="order-form">
+          <label>
+            عنوان الطلب
+            <input type="text" name="title" placeholder="مثال: طلب حفل زفاف" required />
+          </label>
+          <label>
+            العميل
+            <input type="text" name="customer" placeholder="اسم العميل" required />
+          </label>
+          <label>
+            الخدمة
+            <input type="text" name="service" placeholder="اسم الخدمة" required />
+          </label>
+          <label>
+            المبلغ (ريال)
+            <input type="number" name="amount" min="0" step="50" placeholder="2500" required />
+          </label>
+          <button type="submit" class="btn btn-primary wide">إضافة الطلب</button>
+        </form>
+      </section>
+
+      <section class="panel orders-panel">
+        <div class="panel-header">
+          <h2>أحدث الطلبات</h2>
+        </div>
+        <div class="orders-list">${renderOrders(recentOrders)}</div>
       </section>
     </main>
   `;
 }
 
-function renderApp() {
-  const page = pages[currentPage];
+function renderErrorBanner() {
+  if (!state.error) return '';
+  return `<div class="error-banner">${state.error}</div>`;
+}
+
+function render() {
   app.innerHTML = `
     <div class="app-shell">
       ${renderMenu()}
-      ${renderDashboard(page)}
+      ${renderErrorBanner()}
+      ${renderDashboard()}
     </div>
   `;
 
-  const menuPanel = document.querySelector("#menu-panel");
-  const switchButton = document.querySelector(".page-switch");
-  const toggleMenu = () => {
-    const next = menuPanel.classList.toggle("is-open");
-    switchButton.setAttribute("aria-expanded", String(next));
-  };
+  const pageSwitch = document.querySelector('.page-switch');
+  pageSwitch?.addEventListener('click', () => {
+    state.isMenuOpen = !state.isMenuOpen;
+    render();
+  });
 
-  switchButton.addEventListener("click", toggleMenu);
-
-  document.querySelectorAll(".menu-item").forEach((button) => {
-    button.addEventListener("click", () => {
-      currentPage = Number(button.dataset.index);
-      renderApp();
+  document.querySelectorAll('.menu-item').forEach((button) => {
+    button.addEventListener('click', () => {
+      const tab = button.dataset.tab;
+      state.isMenuOpen = false;
+      loadDashboard(tab);
     });
   });
 
-  document.querySelector("[data-action='reload']")?.addEventListener("click", () => {
-    renderApp();
+  document.querySelector('[data-action="reload"]')?.addEventListener('click', () => {
+    loadDashboard(state.currentTab);
   });
 
-  document.querySelector("[data-action='login']")?.addEventListener("click", () => {
-    currentPage = pages.findIndex((page) => page.id === "merchant");
-    renderApp();
+  document.querySelector('[data-action="login"]')?.addEventListener('click', () => {
+    state.isMenuOpen = false;
+    loadDashboard('merchant');
   });
 
-  document.querySelector("[data-action='signup']")?.addEventListener("click", () => {
-    currentPage = pages.findIndex((page) => page.id === "merchant");
-    renderApp();
+  document.querySelector('[data-action="signup"]')?.addEventListener('click', () => {
+    state.isMenuOpen = false;
+    loadDashboard('merchant');
   });
 
-  document.addEventListener("click", (event) => {
-    if (!event.target.closest(".menu-item") && !event.target.closest(".page-switch") && !event.target.closest("#menu-panel")) {
-      menuPanel.classList.remove("is-open");
-      switchButton.setAttribute("aria-expanded", "false");
+  const orderForm = document.querySelector('#order-form');
+  orderForm?.addEventListener('submit', submitOrder);
+
+  document.addEventListener('click', (event) => {
+    const clickedMenu = event.target.closest('.menu-item') || event.target.closest('.page-switch') || event.target.closest('.menu-panel');
+    if (!clickedMenu) {
+      state.isMenuOpen = false;
+      render();
     }
   });
 }
 
-renderApp();
+loadDashboard('customer');
